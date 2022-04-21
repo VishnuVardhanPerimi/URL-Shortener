@@ -1,0 +1,41 @@
+
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1 style="color: rgb(255, 8, 0);"><center>{% block title %} Welcome to URL Shortener {% endblock %}</h1>
+    <form method="post">
+    <div class="form-group">
+        <label for="url"></label><b>Paste the URL below</b></label>
+        <input type="text" name="url"
+               placeholder="URL" class="form-control"
+               value="{{ request.form['url'] }}" autofocus></input>
+    </div>
+
+    <div class="form-group">
+       <center> <button type="submit" class="button"><center><b>Shorten</b></center></button></center>
+    </div>
+    </form>
+
+
+    {% if short_url %}
+    <hr>
+    <span  id="1" >http://127.0.0.1:5000/{{ short_url }}</span>
+    <button class="button" onclick="myfunction()"><b>Copy</b></button>
+
+    <script>
+        function myfunction(id="1")
+            {
+            var r = document.createRange();
+            r.selectNode(document.getElementById(1));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(r);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            }
+    </script>
+    {% endif %}
+    
+            
+{% endblock %}
